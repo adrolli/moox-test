@@ -23,6 +23,11 @@
                         Users
                         </x-dropdown-link>
                         @endcan
+                        @can('view-any', App\Models\Test::class)
+                        <x-dropdown-link href="{{ route('tests.index') }}">
+                        Tests
+                        </x-dropdown-link>
+                        @endcan
                 </x-nav-dropdown>
 
                     @if (Auth::user()->can('view-any', Spatie\Permission\Models\Role::class) || 
@@ -168,6 +173,11 @@
                 @can('view-any', App\Models\User::class)
                 <x-responsive-nav-link href="{{ route('users.index') }}">
                 Users
+                </x-responsive-nav-link>
+                @endcan
+                @can('view-any', App\Models\Test::class)
+                <x-responsive-nav-link href="{{ route('tests.index') }}">
+                Tests
                 </x-responsive-nav-link>
                 @endcan
 

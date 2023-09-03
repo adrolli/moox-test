@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\TestController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\PermissionController;
@@ -33,4 +34,6 @@ Route::name('api.')
         Route::apiResource('permissions', PermissionController::class);
 
         Route::apiResource('users', UserController::class);
+
+        Route::apiResource('tests', TestController::class);
     });

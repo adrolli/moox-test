@@ -15,6 +15,11 @@ class PermissionsSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // Create default permissions
+        Permission::create(['name' => 'list tests']);
+        Permission::create(['name' => 'view tests']);
+        Permission::create(['name' => 'create tests']);
+        Permission::create(['name' => 'update tests']);
+        Permission::create(['name' => 'delete tests']);
 
         // Create user role and assign existing permissions
         $currentPermissions = Permission::all();

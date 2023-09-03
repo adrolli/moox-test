@@ -36,6 +36,22 @@ return [
         ],
     ],
 
+    'tests' => [
+        'name' => 'Tests',
+        'index_title' => 'Tests List',
+        'new_title' => 'New Test',
+        'create_title' => 'Create Test',
+        'edit_title' => 'Edit Test',
+        'show_title' => 'Show Test',
+        'inputs' => [
+            'title' => 'Title',
+            'slug' => 'Slug',
+            'description' => 'Description',
+            'data' => 'Data',
+            'nullable_longtext' => 'Nullable Longtext',
+        ],
+    ],
+
     'roles' => [
         'name' => 'Roles',
         'index_title' => 'Roles List',

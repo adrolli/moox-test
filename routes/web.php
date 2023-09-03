@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 
@@ -34,4 +35,5 @@ Route::prefix('/')
         Route::resource('permissions', PermissionController::class);
 
         Route::resource('users', UserController::class);
+        Route::resource('tests', TestController::class);
     });
