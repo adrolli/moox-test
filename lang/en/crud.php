@@ -22,20 +22,6 @@ return [
         'removed' => 'Successfully removed',
     ],
 
-    'users' => [
-        'name' => 'Users',
-        'index_title' => 'Users List',
-        'new_title' => 'New User',
-        'create_title' => 'Create User',
-        'edit_title' => 'Edit User',
-        'show_title' => 'Show User',
-        'inputs' => [
-            'name' => 'Name',
-            'email' => 'Email',
-            'password' => 'Password',
-        ],
-    ],
-
     'tests' => [
         'name' => 'Tests',
         'index_title' => 'Tests List',
@@ -49,6 +35,20 @@ return [
             'description' => 'Description',
             'data' => 'Data',
             'nullable_longtext' => 'Nullable Longtext',
+        ],
+    ],
+
+    'users' => [
+        'name' => 'Users',
+        'index_title' => 'Users List',
+        'new_title' => 'New User',
+        'create_title' => 'Create User',
+        'edit_title' => 'Edit User',
+        'show_title' => 'Show User',
+        'inputs' => [
+            'name' => 'Name',
+            'email' => 'Email',
+            'password' => 'Password',
         ],
     ],
 

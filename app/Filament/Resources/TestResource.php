@@ -3,9 +3,8 @@
 namespace App\Filament\Resources;
 
 use Filament\Forms;
-use App\Models\User;
+use App\Models\Test;
 use Filament\Tables;
-use Livewire\Component;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
 use Filament\Resources\Resource;
@@ -13,60 +12,69 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Card;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Actions\EditAction;
-use Illuminate\Database\Eloquent\Model;
+use Filament\Forms\Components\KeyValue;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\RichEditor;
 use App\Filament\Filters\DateRangeFilter;
 use Filament\Tables\Actions\DeleteBulkAction;
-use App\Filament\Resources\UserResource\Pages;
+use App\Filament\Resources\TestResource\Pages;
 
-class UserResource extends Resource
+class TestResource extends Resource
 {
-    protected static ?string $model = User::class;
+    protected static ?string $model = Test::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $recordTitleAttribute = 'name';
+    protected static ?string $recordTitleAttribute = 'title';
 
     public static function form(Form $form): Form
     {
         return $form->schema([
             Card::make()->schema([
                 Grid::make(['default' => 0])->schema([
-                    TextInput::make('name')
+                    TextInput::make('title')
                         ->rules(['max:255', 'string'])
                         ->required()
-                        ->placeholder('Name')
+                        ->placeholder('Title')
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
                             'lg' => 12,
                         ]),
 
-                    TextInput::make('email')
-                        ->rules(['email'])
+                    TextInput::make('slug')
+                        ->rules(['max:255', 'string'])
                         ->required()
-                        ->unique(
-                            'users',
-                            'email',
-                            fn(?Model $record) => $record
-                        )
-                        ->email()
-                        ->placeholder('Email')
+                        ->placeholder('Slug')
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
                             'lg' => 12,
                         ]),
 
-                    TextInput::make('password')
+                    RichEditor::make('description')
+                        ->rules(['max:255', 'string'])
                         ->required()
-                        ->password()
-                        ->dehydrateStateUsing(fn($state) => \Hash::make($state))
-                        ->required(
-                            fn(Component $livewire) => $livewire instanceof
-                                Pages\CreateUser
-                        )
-                        ->placeholder('Password')
+                        ->placeholder('Description')
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 12,
+                        ]),
+
+                    KeyValue::make('data')
+                        ->required()
+                        ->required()
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 12,
+                        ]),
+
+                    RichEditor::make('nullable_longtext')
+                        ->rules(['max:255', 'string'])
+                        ->nullable()
+                        ->placeholder('Nullable Longtext')
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
@@ -82,13 +90,21 @@ class UserResource extends Resource
         return $table
             ->poll('60s')
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('title')
                     ->toggleable()
                     ->searchable(true, null, true)
                     ->limit(50),
-                Tables\Columns\TextColumn::make('email')
+                Tables\Columns\TextColumn::make('slug')
                     ->toggleable()
                     ->searchable(true, null, true)
+                    ->limit(50),
+                Tables\Columns\TextColumn::make('description')
+                    ->toggleable()
+                    ->searchable()
+                    ->limit(50),
+                Tables\Columns\TextColumn::make('nullable_longtext')
+                    ->toggleable()
+                    ->searchable()
                     ->limit(50),
             ])
             ->filters([DateRangeFilter::make('created_at')])
@@ -98,16 +114,16 @@ class UserResource extends Resource
 
     public static function getRelations(): array
     {
-        return [UserResource\RelationManagers\TestsRelationManager::class];
+        return [TestResource\RelationManagers\UsersRelationManager::class];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'create' => Pages\CreateUser::route('/create'),
-            'view' => Pages\ViewUser::route('/{record}'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'index' => Pages\ListTests::route('/'),
+            'create' => Pages\CreateTest::route('/create'),
+            'view' => Pages\ViewTest::route('/{record}'),
+            'edit' => Pages\EditTest::route('/{record}/edit'),
         ];
     }
 }

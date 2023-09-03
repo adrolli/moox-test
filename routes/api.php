@@ -2,12 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\TestController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RoleController;
-use App\Http\Controllers\Api\UserTestsController;
 use App\Http\Controllers\Api\TestUsersController;
+use App\Http\Controllers\Api\UserTestsController;
 use App\Http\Controllers\Api\PermissionController;
 
 /*
@@ -35,22 +35,6 @@ Route::name('api.')
         Route::apiResource('roles', RoleController::class);
         Route::apiResource('permissions', PermissionController::class);
 
-        Route::apiResource('users', UserController::class);
-
-        // User Tests
-        Route::get('/users/{user}/tests', [
-            UserTestsController::class,
-            'index',
-        ])->name('users.tests.index');
-        Route::post('/users/{user}/tests/{test}', [
-            UserTestsController::class,
-            'store',
-        ])->name('users.tests.store');
-        Route::delete('/users/{user}/tests/{test}', [
-            UserTestsController::class,
-            'destroy',
-        ])->name('users.tests.destroy');
-
         Route::apiResource('tests', TestController::class);
 
         // Test Users
@@ -66,4 +50,20 @@ Route::name('api.')
             TestUsersController::class,
             'destroy',
         ])->name('tests.users.destroy');
+
+        Route::apiResource('users', UserController::class);
+
+        // User Tests
+        Route::get('/users/{user}/tests', [
+            UserTestsController::class,
+            'index',
+        ])->name('users.tests.index');
+        Route::post('/users/{user}/tests/{test}', [
+            UserTestsController::class,
+            'store',
+        ])->name('users.tests.store');
+        Route::delete('/users/{user}/tests/{test}', [
+            UserTestsController::class,
+            'destroy',
+        ])->name('users.tests.destroy');
     });
