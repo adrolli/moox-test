@@ -22,6 +22,20 @@ return [
         'removed' => 'Successfully removed',
     ],
 
+    'users' => [
+        'name' => 'Users',
+        'index_title' => 'Users List',
+        'new_title' => 'New User',
+        'create_title' => 'Create User',
+        'edit_title' => 'Edit User',
+        'show_title' => 'Show User',
+        'inputs' => [
+            'name' => 'Name',
+            'email' => 'Email',
+            'password' => 'Password',
+        ],
+    ],
+
     'roles' => [
         'name' => 'Roles',
         'index_title' => 'Roles List',
