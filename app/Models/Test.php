@@ -24,4 +24,9 @@ class Test extends Model
     protected $casts = [
         'data' => 'array',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

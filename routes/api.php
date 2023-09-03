@@ -6,6 +6,8 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\TestController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\UserTestsController;
+use App\Http\Controllers\Api\TestUsersController;
 use App\Http\Controllers\Api\PermissionController;
 
 /*
@@ -35,5 +37,33 @@ Route::name('api.')
 
         Route::apiResource('users', UserController::class);
 
+        // User Tests
+        Route::get('/users/{user}/tests', [
+            UserTestsController::class,
+            'index',
+        ])->name('users.tests.index');
+        Route::post('/users/{user}/tests/{test}', [
+            UserTestsController::class,
+            'store',
+        ])->name('users.tests.store');
+        Route::delete('/users/{user}/tests/{test}', [
+            UserTestsController::class,
+            'destroy',
+        ])->name('users.tests.destroy');
+
         Route::apiResource('tests', TestController::class);
+
+        // Test Users
+        Route::get('/tests/{test}/users', [
+            TestUsersController::class,
+            'index',
+        ])->name('tests.users.index');
+        Route::post('/tests/{test}/users/{user}', [
+            TestUsersController::class,
+            'store',
+        ])->name('tests.users.store');
+        Route::delete('/tests/{test}/users/{user}', [
+            TestUsersController::class,
+            'destroy',
+        ])->name('tests.users.destroy');
     });

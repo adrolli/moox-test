@@ -41,6 +41,11 @@ class User extends Authenticatable implements FilamentUser
         'two_factor_confirmed_at' => 'datetime',
     ];
 
+    public function tests()
+    {
+        return $this->belongsToMany(Test::class);
+    }
+
     public function isSuperAdmin(): bool
     {
         return $this->hasRole('super-admin');
